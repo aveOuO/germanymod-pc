@@ -10,7 +10,6 @@
 #include <cstdlib>
 #include <Logger.hpp>
 #include <WinReg.hpp>
-#include "Test.hpp"
 #include <HttpService.hpp>
 
 #define GameName "Pixel Gun 3D"
