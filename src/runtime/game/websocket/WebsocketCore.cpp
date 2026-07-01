@@ -27,7 +27,7 @@ namespace WebsocketCore
 	};
 
 
-	bool dumpMasterkey = true;
+	bool dumpMasterkey = false;
 	bool dumpChipertext = true;
 	bool logWebsocket = false;
 	IL2CPP::Object* WSManagerInstance = nullptr;
@@ -286,11 +286,6 @@ namespace WebsocketCore
 		$RegisterHook(
 			SocketReceive,
 			GetClass("AesFacade")->GetMethod(0x1)
-		);
-
-		$RegisterHook(
-			SocketReceive,
-			GetClass("AesFacade")->GetMethod(0x0)
 		);
 	}
 
