@@ -1769,29 +1769,45 @@ namespace Menu
 				StringInput SquadHash2(&GROUP, "Squad Hash 2", "");
 				StringInput Name(&GROUP, "Name", "");
 				StringInput Receiver(&GROUP, "Receiver", "");
+					StringInput RoomName(&GROUP, "Room Name", "");
 
-				Button Test(&GROUP, "Test");
+					Button Test(&GROUP, "Test");
+					Button JoinRoom(&GROUP, "Join Room");
 
-				void Load()
-				{
-					Test.OnClick([&]
+					void Load()
 					{
-						SquadCommands::InSquad(SquadHash1.GetValue());
-						SquadCommands::SendSquadInvite(
-							SquadHash2.GetValue(),
-							Name.GetValue(),
-							Receiver.GetValue()
-						);
-					});
+						Test.OnClick([&]
+						{
+							SquadCommands::InSquad(SquadHash1.GetValue());
+							SquadCommands::SendSquadInvite(
+								SquadHash2.GetValue(),
+								Name.GetValue(),
+								Receiver.GetValue()
+							);
+						});
+
+						JoinRoom.OnClick([&]
+						{
+							const std::string room = RoomName.GetValue();
+							if (room.empty())
+							{
+								return;
+							}
+
+							Global::ExecuteOnGameThread([room]()
+							{
+								GameplayMain::JoinRoomByName(room);
+							});
+						});
+					}
 				}
-			}
 
-			namespace ItemRecord
-			{
-				Group GROUP(&TAB, "Item Record");
-				Button DumpItemRecord(&GROUP, "Dump Item Records");
+				namespace ItemRecord
+				{
+					Group GROUP(&TAB, "Item Record");
+					Button DumpItemRecord(&GROUP, "Dump Item Records");
 
-				std::map<std::string, int> offerItemType = {
+					std::map<std::string, int> offerItemType = {
 					{"None", 0},
 					{"Weapon", 10},
 					{"Armor", 20},

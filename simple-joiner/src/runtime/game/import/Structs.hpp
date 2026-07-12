@@ -1,0 +1,1091 @@
+#pragma once
+#include <iostream>
+#include <Windows.h>
+#include <IL2CPP.hpp>
+
+enum class CommandID
+{
+	None = 0, // Index: 0x1 Offset: 0x0
+	SetNick = 1, // Index: 0x2 Offset: 0x0
+	AddRating = 2, // Index: 0x3 Offset: 0x0
+	SetLeagueInTournament = 3, // Index: 0x4 Offset: 0x0
+	AddCurrency = 10, // Index: 0x5 Offset: 0x0
+	GetGemOrCoinInCompany = 11, // Index: 0x6 Offset: 0x0
+	ShowComicsInCompany = 13, // Index: 0x7 Offset: 0x0
+	CompleteLevelInCompany = 14, // Index: 0x8 Offset: 0x0
+	UpdateAchivements = 15, // Index: 0x9 Offset: 0x0
+	ShowComicsInBox = 16, // Index: 0xa Offset: 0x0
+	AddOrUpgradePet = 17, // Index: 0xb Offset: 0x0
+	AddEgg = 18, // Index: 0xc Offset: 0x0
+	EggHatched = 19, // Index: 0xd Offset: 0x0
+	UpdateLobbyItems = 20, // Index: 0xe Offset: 0x0
+	RemoveLobbyItem = 21, // Index: 0xf Offset: 0x0
+	UpdateLobbyItemAndRewardExperience = 22, // Index: 0x10 Offset: 0x0
+	UpdateBestScore = 23, // Index: 0x11 Offset: 0x0
+	MergeCampaingSlot = 24, // Index: 0x12 Offset: 0x0
+	UpdatePlayerEquipment = 25, // Index: 0x13 Offset: 0x0
+	UpdateBool = 26, // Index: 0x14 Offset: 0x0
+	UpdateSkinList = 27, // Index: 0x15 Offset: 0x0
+	UpdateBattleRoyaleList = 28, // Index: 0x16 Offset: 0x0
+	UpdateCustomSkin = 29, // Index: 0x17 Offset: 0x0
+	DeleteCustomSkin = 30, // Index: 0x18 Offset: 0x0
+	AddPurchasedWear = 31, // Index: 0x19 Offset: 0x0
+	StartUpArmor = 32, // Index: 0x1a Offset: 0x0
+	AddPurhasedGadget = 33, // Index: 0x1b Offset: 0x0
+	SetTutorialStage = 35, // Index: 0x1c Offset: 0x0
+	PurchaseWeaponSkin = 36, // Index: 0x1d Offset: 0x0
+	GameEvents_Spin = 38, // Index: 0x1e Offset: 0x0
+	GameEvents_FreeSpin = 39, // Index: 0x1f Offset: 0x0
+	GameEvents_UpdateFreeSpin = 40, // Index: 0x20 Offset: 0x0
+	GameEvents_UpdateCurreny = 41, // Index: 0x21 Offset: 0x0
+	GameEvents_RemoveCurreny = 42, // Index: 0x22 Offset: 0x0
+	GameEvents_RemoveGameEvent = 43, // Index: 0x23 Offset: 0x0
+	GameEvents_SetDurtyChest = 44, // Index: 0x24 Offset: 0x0
+	BattlePassInitSeason = 50, // Index: 0x25 Offset: 0x0
+	BattlePassGiveDailyExp = 51, // Index: 0x26 Offset: 0x0
+	BattlePassBuyPaymentStatus = 52, // Index: 0x27 Offset: 0x0
+	BattlePassTutorialChangeState = 53, // Index: 0x28 Offset: 0x0
+	BattlePassChangeInfo = 54, // Index: 0x29 Offset: 0x0
+	BattlePassCompleteSeason = 55, // Index: 0x2a Offset: 0x0
+	BattlePassChangeChallengesProgress = 56, // Index: 0x2b Offset: 0x0
+	BattlePassBannerEndViewed = 57, // Index: 0x2c Offset: 0x0
+	BattlePassBuyLevel = 58, // Index: 0x2d Offset: 0x0
+	UpdateConfig = 60, // Index: 0x2e Offset: 0x0
+	UpdateProgress = 61, // Index: 0x2f Offset: 0x0
+	UpdateRewards = 62, // Index: 0x30 Offset: 0x0
+	Snapshot = 63, // Index: 0x31 Offset: 0x0
+	UpdateLevel = 64, // Index: 0x32 Offset: 0x0
+	UpdateExperience = 65, // Index: 0x33 Offset: 0x0
+	SpendCurrency = 66, // Index: 0x34 Offset: 0x0
+	UpdateUtilityDictionaryValue = 67, // Index: 0x35 Offset: 0x0
+	UpdateUtilityIds = 68, // Index: 0x36 Offset: 0x0
+	UpdateWeaponsGotInCampaing = 69, // Index: 0x37 Offset: 0x0
+	GatchaGifts_UpdateFreeSpin = 71, // Index: 0x38 Offset: 0x0
+	GatchaGifts_UpdateGiftIndex = 72, // Index: 0x39 Offset: 0x0
+	GatchaGifts_UpdateSpinStep = 73, // Index: 0x3a Offset: 0x0
+	GatchaGifts_UpdateCachedState = 74, // Index: 0x3b Offset: 0x0
+	GatchaGifts_UpdateGiftList = 75, // Index: 0x3c Offset: 0x0
+	GatchaGifts_UpdateGiftTime = 76, // Index: 0x3d Offset: 0x0
+	GatchaGifts_UpdateConfigVersion = 77, // Index: 0x3e Offset: 0x0
+	InventoryAddItemExpiryOnServer = 78, // Index: 0x3f Offset: 0x0
+	InventoryAddItemExpiry = 79, // Index: 0x40 Offset: 0x0
+	InventoryAddItemConsumable = 80, // Index: 0x41 Offset: 0x0
+	InventoryRemoveItemConsumable = 81, // Index: 0x42 Offset: 0x0
+	InventoryAddItemUnique = 82, // Index: 0x43 Offset: 0x0
+	InventoryRemoveItemUnique = 83, // Index: 0x44 Offset: 0x0
+	InventoryAddItemSingle = 84, // Index: 0x45 Offset: 0x0
+	InventoryRemoveItemSingle = 85, // Index: 0x46 Offset: 0x0
+	InventoryRemoveItemExpiry = 86, // Index: 0x47 Offset: 0x0
+	ModuleInfoIncreaseUp = 87, // Index: 0x48 Offset: 0x0
+	ModuleStorageAddModule = 88, // Index: 0x49 Offset: 0x0
+	ModuleStorageRemoveModule = 89, // Index: 0x4a Offset: 0x0
+	AddWeapon = 100, // Index: 0x4b Offset: 0x0
+	StartUpgradingWeapon = 101, // Index: 0x4c Offset: 0x0
+	FinishUpgradingWeapon = 102, // Index: 0x4d Offset: 0x0
+	StartCraftItem = 103, // Index: 0x4e Offset: 0x0
+	FinishCraftItem = 104, // Index: 0x4f Offset: 0x0
+	UpdateFirstUps = 105, // Index: 0x50 Offset: 0x0
+	EmptyCommand = 106, // Index: 0x51 Offset: 0x0
+	AddTryGun = 110, // Index: 0x52 Offset: 0x0
+	DecreaseTryGunMatchesCount = 111, // Index: 0x53 Offset: 0x0
+	AddTryGunOffer = 112, // Index: 0x54 Offset: 0x0
+	UpdateTryGunTime = 113, // Index: 0x55 Offset: 0x0
+	RemoveTryGunOffer = 114, // Index: 0x56 Offset: 0x0
+	RemoveTryGun = 115, // Index: 0x57 Offset: 0x0
+	EquipWeaponSkin = 116, // Index: 0x58 Offset: 0x0
+	UpdateLobbyItemTimer = 117, // Index: 0x59 Offset: 0x0
+	UpdateEgg = 118, // Index: 0x5a Offset: 0x0
+	AddDetails = 120, // Index: 0x5b Offset: 0x0
+	UpdateBRVehicle = 130, // Index: 0x5c Offset: 0x0
+	UpdateUpgradingBRVehicle = 131, // Index: 0x5d Offset: 0x0
+	AddWeaponV17 = 132, // Index: 0x5e Offset: 0x0
+	AddTryGunV17 = 133, // Index: 0x5f Offset: 0x0
+	RemoveTryGunV17 = 134, // Index: 0x60 Offset: 0x0
+	AddTryGunOfferV17 = 135, // Index: 0x61 Offset: 0x0
+	RemoveTryGunOfferV17 = 136, // Index: 0x62 Offset: 0x0
+	DecreaseTryGunMatchesCountV17 = 137, // Index: 0x63 Offset: 0x0
+	UpdateTryGunTimeV17 = 138, // Index: 0x64 Offset: 0x0
+	UpdateFirstUpsV17 = 139, // Index: 0x65 Offset: 0x0
+	Offers_ResetSeason = 141, // Index: 0x66 Offset: 0x0
+	ChangeRank = 142, // Index: 0x67 Offset: 0x0
+	EquipWeaponSkinV2 = 143, // Index: 0x68 Offset: 0x0
+	UnequipWeaponSkinV2 = 144, // Index: 0x69 Offset: 0x0
+	AddTryGunBuffV17 = 145, // Index: 0x6a Offset: 0x0
+	GameTaskChangeProgress = 150, // Index: 0x6b Offset: 0x0
+	GameTaskCompleted = 151, // Index: 0x6c Offset: 0x0
+	GameTaskRewarded = 152, // Index: 0x6d Offset: 0x0
+	GameTaskChangeInfoInBattle = 153, // Index: 0x6e Offset: 0x0
+	GameTaskReset = 154, // Index: 0x6f Offset: 0x0
+	GameTaskResetAllTasks = 155, // Index: 0x70 Offset: 0x0
+	Almanach_SetRewarded_Weapons = 160, // Index: 0x71 Offset: 0x0
+	Almanach_SetRewarded_WeaponSets = 161, // Index: 0x72 Offset: 0x0
+	Almanach_SetRewarded_CollectWeaponsSteps = 162, // Index: 0x73 Offset: 0x0
+	Almanach_SetCount_CollectWeaponsStep = 163, // Index: 0x74 Offset: 0x0
+	ValidateInApp = 164, // Index: 0x75 Offset: 0x0
+	AddGiftInSlot = 165, // Index: 0x76 Offset: 0x0
+	UnpackGift = 166, // Index: 0x77 Offset: 0x0
+	RemoveGiftFromSlot = 167, // Index: 0x78 Offset: 0x0
+	ReplaceGiftsInSlot = 168, // Index: 0x79 Offset: 0x0
+	Offers_AddOrUpdateOffer = 169, // Index: 0x7a Offset: 0x0
+	Offers_RemoveOffer = 170, // Index: 0x7b Offset: 0x0
+	Offers_ResetOffers = 171, // Index: 0x7c Offset: 0x0
+	Offers_UpdateOffersModule = 172, // Index: 0x7d Offset: 0x0
+	Offers_ResetOffersModule = 173, // Index: 0x7e Offset: 0x0
+	AddClanItems = 174, // Index: 0x7f Offset: 0x0
+	RemoveClanItems = 175, // Index: 0x80 Offset: 0x0
+	ReplaceClanItems = 176, // Index: 0x81 Offset: 0x0
+	ClanWarSetClanWarSeasonId = 177, // Index: 0x82 Offset: 0x0
+	ClanWarAddRewardedCaptureCellKey = 178, // Index: 0x83 Offset: 0x0
+	CheckSubscriptionOnGiveReward = 179, // Index: 0x84 Offset: 0x0
+	UpdateClanLevel = 180, // Index: 0x85 Offset: 0x0
+	UpdateClanExperience = 181, // Index: 0x86 Offset: 0x0
+	CreateClanItems = 182, // Index: 0x87 Offset: 0x0
+	AddFinishingClanItemUpgrade = 184, // Index: 0x88 Offset: 0x0
+	RemoveFinishingClanItemUpgrade = 185, // Index: 0x89 Offset: 0x0
+	ClanWarRewardedKeysMigration = 186, // Index: 0x8a Offset: 0x0
+	AddMailBoxRewardRecord = 187, // Index: 0x8b Offset: 0x0
+	RemoveMailBoxRewardRecord = 188, // Index: 0x8c Offset: 0x0
+	ClanWarSetGoblinCollectSilverAndShields = 189, // Index: 0x8d Offset: 0x0
+	UpdateClanLevelAndExperience = 190, // Index: 0x8e Offset: 0x0
+	BuyArmor = 191, // Index: 0x8f Offset: 0x0
+	CompleteCommonMatch = 192, // Index: 0x90 Offset: 0x0
+	CompleteBRDGMatch = 193, // Index: 0x91 Offset: 0x0
+	BlackMarketReset = 194, // Index: 0x92 Offset: 0x0
+	BlackMarketOpenCell = 195, // Index: 0x93 Offset: 0x0
+	BlackMarketUpdateCells = 196, // Index: 0x94 Offset: 0x0
+	EquipArmorSkin = 197, // Index: 0x95 Offset: 0x0
+	UnequipArmorSkin = 198, // Index: 0x96 Offset: 0x0
+	BlackMarketFirstSetClanWarSeasonId = 199, // Index: 0x97 Offset: 0x0
+	RemoveLegacyArmors = 200, // Index: 0x98 Offset: 0x0
+	ClanStorePromotionSetLastGenerateIndex = 201, // Index: 0x99 Offset: 0x0
+	ClanStorePromotionSetLastDollarPrice = 202, // Index: 0x9a Offset: 0x0
+	ClanStorePromotionReInit = 203, // Index: 0x9b Offset: 0x0
+	ClanStorePromotionSave = 204, // Index: 0x9c Offset: 0x0
+	ClanStorePromotionClear = 205, // Index: 0x9d Offset: 0x0
+	ClanBuildingsAddItems = 206, // Index: 0x9e Offset: 0x0
+	ClanBuildingsUpgradeBuilding = 207, // Index: 0x9f Offset: 0x0
+	ClanStorePromotionSendGenerateData = 208, // Index: 0xa0 Offset: 0x0
+	BlackMarketUpdateRefreshCounter = 211, // Index: 0xa1 Offset: 0x0
+	ClanGovernorSaveTask = 212, // Index: 0xa2 Offset: 0x0
+	ClanGovernorResetCell = 213, // Index: 0xa3 Offset: 0x0
+	ClanGovernorOpenCell = 214, // Index: 0xa4 Offset: 0x0
+	ClanGovernorGiveCellReward = 215, // Index: 0xa5 Offset: 0x0
+	ClanGovernorSetRefreshCountByVideo = 216, // Index: 0xa6 Offset: 0x0
+	ClanGovernorSetRefreshCountByPrice = 217, // Index: 0xa7 Offset: 0x0
+	ClanGovernorSelectBuilding = 218, // Index: 0xa8 Offset: 0x0
+	ClanGovernorSetBuildingPoints = 219, // Index: 0xa9 Offset: 0x0
+	ClanGovernorResetSlot = 220, // Index: 0xaa Offset: 0x0
+	AddTryGunAdCell = 221, // Index: 0xab Offset: 0x0
+	RemoveTryGunAdCell = 222, // Index: 0xac Offset: 0x0
+	AdsGunSetSeason = 223, // Index: 0xad Offset: 0x0
+	AdsGunResetCells = 224, // Index: 0xae Offset: 0x0
+	AdsGunIncrementAds = 225, // Index: 0xaf Offset: 0x0
+	AdsGunCollectTryGun = 226, // Index: 0xb0 Offset: 0x0
+	AdsGunEndTryGun = 227, // Index: 0xb1 Offset: 0x0
+	AdsGunSetAsShown = 228, // Index: 0xb2 Offset: 0x0
+	AddPetV3 = 229, // Index: 0xb3 Offset: 0x0
+	UpgradePetV3 = 230, // Index: 0xb4 Offset: 0x0
+	RenamePetV3 = 231, // Index: 0xb5 Offset: 0x0
+	AddPetCardsV3 = 232, // Index: 0xb6 Offset: 0x0
+	RemovePetCardsV3 = 233, // Index: 0xb7 Offset: 0x0
+	GameModeTapReward_SetRewardTime = 234, // Index: 0xb8 Offset: 0x0
+	ConnectSceneChestSetCountOpenedSmallChest = 235, // Index: 0xb9 Offset: 0x0
+	ConnectSceneChestSetCountAlgorithmAttempt = 236, // Index: 0xba Offset: 0x0
+	ConnectSceneChestSetAlgorithmWeights = 237, // Index: 0xbb Offset: 0x0
+	ConnectSceneChestSetIsInitAvailableKeys = 238, // Index: 0xbc Offset: 0x0
+	ConnectSceneChestSetAvailableKeys = 239, // Index: 0xbd Offset: 0x0
+	ConnectSceneChestSetRefreshKeyStartTime = 240, // Index: 0xbe Offset: 0x0
+	ConnectSceneChestSaveSpendKeys = 241, // Index: 0xbf Offset: 0x0
+	AddEggV3 = 242, // Index: 0xc0 Offset: 0x0
+	RemoveEggV3 = 243, // Index: 0xc1 Offset: 0x0
+	StartEggV3 = 244, // Index: 0xc2 Offset: 0x0
+	SpeedUpEggV3 = 245, // Index: 0xc3 Offset: 0x0
+	UpdateRankV2 = 246, // Index: 0xc4 Offset: 0x0
+	UpdateTrophyRoadLevel = 247, // Index: 0xc5 Offset: 0x0
+	TrophyRoadGiveReward = 248, // Index: 0xc6 Offset: 0x0
+	TrophyRoadStartSeason = 249, // Index: 0xc7 Offset: 0x0
+	TrophyRoadEndSeason = 250, // Index: 0xc8 Offset: 0x0
+	TrophyRoadMarkEndSeason = 251, // Index: 0xc9 Offset: 0x0
+	TrophyRoadDevEndSeason = 252, // Index: 0xca Offset: 0x0
+	TutorialComplete = 253, // Index: 0xcb Offset: 0x0
+	SaveMatchInHistory = 254, // Index: 0xcc Offset: 0x0
+	UpdateCupsForMatchHistory = 255, // Index: 0xcd Offset: 0x0
+	UpdateCupsForPlayersMatchHistory = 256, // Index: 0xce Offset: 0x0
+	ConstructableOffersSaveGeneratedOffers = 257, // Index: 0xcf Offset: 0x0
+	ConstructableOffersSelectItemInCell = 258, // Index: 0xd0 Offset: 0x0
+	ConstructableOffersIncrementPurchasedCount = 259, // Index: 0xd1 Offset: 0x0
+	MarkWeaponSkinDiscovered = 260, // Index: 0xd2 Offset: 0x0
+	Marathon = 261, // Index: 0xd3 Offset: 0x0
+	GameEventDropChanceSetEventUniqueId = 262, // Index: 0xd4 Offset: 0x0
+	GameEventDropChanceSetEventFirstInit = 263, // Index: 0xd5 Offset: 0x0
+	GameEventDropChanceAddInappPrice = 264, // Index: 0xd6 Offset: 0x0
+	GameEventDropChanceClearInappPrice = 265, // Index: 0xd7 Offset: 0x0
+	GameEventDropChanceSetChances = 266, // Index: 0xd8 Offset: 0x0
+	SetSecretPickedUp = 267, // Index: 0xd9 Offset: 0x0
+	PiggyUpdateLevel_OLD = 268, // Index: 0xda Offset: 0x0
+	PiggyUpdateSeason_OLD = 269, // Index: 0xdb Offset: 0x0
+	PiggyViewBanner_OLD = 270, // Index: 0xdc Offset: 0x0
+	PiggyBuyPromotion_OLD = 271, // Index: 0xdd Offset: 0x0
+	PiggyUpdateLevelView_OLD = 272, // Index: 0xde Offset: 0x0
+	ManualOffersUpdateSlot = 273, // Index: 0xdf Offset: 0x0
+	ManualOffersBuyPromotion = 274, // Index: 0xe0 Offset: 0x0
+	ManualOffersViewBanner = 275, // Index: 0xe1 Offset: 0x0
+	DoubleOffersGenerateOffers = 276, // Index: 0xe2 Offset: 0x0
+	DoubleOffersSetIsBought = 277, // Index: 0xe3 Offset: 0x0
+	DoubleOffersSetStartTime = 278, // Index: 0xe4 Offset: 0x0
+	DoubleOffersSetLastShowTime = 279, // Index: 0xe5 Offset: 0x0
+	Vip20UpdatePaymentType = 280, // Index: 0xe6 Offset: 0x0
+	Vip20BuyPromotion = 281, // Index: 0xe7 Offset: 0x0
+	Vip20UpdateState = 282, // Index: 0xe8 Offset: 0x0
+	Vip20ViewOverBanner = 283, // Index: 0xe9 Offset: 0x0
+	ConstructableOffersViewBanner = 284, // Index: 0xea Offset: 0x0
+	ManualOffersPresentationViewBanner = 285, // Index: 0xeb Offset: 0x0
+	ConstructableOffersViewPresentationBanner = 286, // Index: 0xec Offset: 0x0
+	SetCurrentLoadoutNumber = 287, // Index: 0xed Offset: 0x0
+	WriteUpdateLoadout = 288, // Index: 0xee Offset: 0x0
+	Vip20CompleteMigration = 289, // Index: 0xef Offset: 0x0
+	DoubleOffersRegenerateItems = 290, // Index: 0xf0 Offset: 0x0
+	GachaNoviceGiftSetItemIndex = 291, // Index: 0xf1 Offset: 0x0
+	GachaNoviceGiftCollectItem = 292, // Index: 0xf2 Offset: 0x0
+	GachaNoviceGiftSetWasShow = 293, // Index: 0xf3 Offset: 0x0
+	GachaNoviceGiftIncrementCountBattle = 294, // Index: 0xf4 Offset: 0x0
+	GachaNoviceGiftCompleteTutorial = 295, // Index: 0xf5 Offset: 0x0
+	PiggyStartSeason = 296, // Index: 0xf6 Offset: 0x0
+	PiggyCompleteSeason_OLD_V2 = 297, // Index: 0xf7 Offset: 0x0
+	PiggyFakeCompleteSeason = 298, // Index: 0xf8 Offset: 0x0
+	PiggyGiveRewards = 299, // Index: 0xf9 Offset: 0x0
+	PiggyBuyPromotion = 300, // Index: 0xfa Offset: 0x0
+	PiggyUpdateLevel = 301, // Index: 0xfb Offset: 0x0
+	PiggyViewBanner = 302, // Index: 0xfc Offset: 0x0
+	PiggyUpdateLevelView = 303, // Index: 0xfd Offset: 0x0
+	NoviceDoubleOffersOpen = 304, // Index: 0xfe Offset: 0x0
+	NoviceDoubleOffersStart = 305, // Index: 0xff Offset: 0x0
+	NoviceDoubleOffersShow = 306, // Index: 0x100 Offset: 0x0
+	NoviceDoubleOffersPurchase = 307, // Index: 0x101 Offset: 0x0
+	ProgressRoadUpdateRewardsProgress = 308, // Index: 0x102 Offset: 0x0
+	PiggyCompleteSeasonV3 = 309, // Index: 0x103 Offset: 0x0
+	AttributeChange = 310, // Index: 0x104 Offset: 0x0
+	ProgressRoadUpdateStateMigration = 311, // Index: 0x105 Offset: 0x0
+	ProgressRoadSetTakenRewards = 312, // Index: 0x106 Offset: 0x0
+	UniversalPromotionStartPromotion = 313, // Index: 0x107 Offset: 0x0
+	UniversalPromotionSetGroupStartCounter = 314, // Index: 0x108 Offset: 0x0
+	UniversalPromotionSetGroupCooldownStartTime = 315, // Index: 0x109 Offset: 0x0
+	UniversalPromotionBuyPromotion = 316, // Index: 0x10a Offset: 0x0
+	UniversalPromotionStopPromotion = 317, // Index: 0x10b Offset: 0x0
+	UniversalPromotionSetPromotionLastBannerView = 318, // Index: 0x10c Offset: 0x0
+	UniversalPromotionGenerate = 319, // Index: 0x10d Offset: 0x0
+	GameModeHubTapRewardsSet = 320, // Index: 0x10e Offset: 0x0
+	ShopSetBuyTime = 321, // Index: 0x10f Offset: 0x0
+	PixelPassSaveConfig = 322, // Index: 0x110 Offset: 0x0
+	PixelPassGiveLevelCellReward = 323, // Index: 0x111 Offset: 0x0
+	PixelPassBuyPremium = 324, // Index: 0x112 Offset: 0x0
+	PixelPassGiveEliteReward = 325, // Index: 0x113 Offset: 0x0
+	PixelPassObtainExp = 326, // Index: 0x114 Offset: 0x0
+	PixelPassSpendExp = 327, // Index: 0x115 Offset: 0x0
+	PixelPassSetIsCompleteEliteTasks = 328, // Index: 0x116 Offset: 0x0
+	PixelPassSetChangedTaskIndex = 329, // Index: 0x117 Offset: 0x0
+	PixelPassSetWatchedVideo = 330, // Index: 0x118 Offset: 0x0
+	PixelPassCloseSeason = 331, // Index: 0x119 Offset: 0x0
+	PixelPassIncrementOfferBuyCount = 332, // Index: 0x11a Offset: 0x0
+	PixelPassSaveOffersStartDay = 333, // Index: 0x11b Offset: 0x0
+	RemoveWearItemIndeces = 334, // Index: 0x11c Offset: 0x0
+	PixelPassPresentationView = 335, // Index: 0x11d Offset: 0x0
+	BattleStatisticEndMatch = 336, // Index: 0x11e Offset: 0x0
+	PixelPassAddCompleteTaskReward = 337, // Index: 0x11f Offset: 0x0
+	PixelPassRemoveCompleteTaskReward = 338, // Index: 0x120 Offset: 0x0
+	PixelPassSaveLastViewedBuyPremiumWindow = 339, // Index: 0x121 Offset: 0x0
+	UniversalPromotionSetGroupPromotionLastBannerView = 340, // Index: 0x122 Offset: 0x0
+	Subscription20Subscribe = 341, // Index: 0x123 Offset: 0x0
+	Subscription20CollectReward = 342, // Index: 0x124 Offset: 0x0
+	Subscription20CollectLastReward = 343, // Index: 0x125 Offset: 0x0
+	Subscription20RemoveSubscription = 344, // Index: 0x126 Offset: 0x0
+	Subscription20SetPromotionLastBannerView = 345, // Index: 0x127 Offset: 0x0
+	UniversalPromotionSetSeasonId = 350, // Index: 0x128 Offset: 0x0
+	PromocodeUsePromocode = 351, // Index: 0x129 Offset: 0x0
+	UpdatePlayerStats = 352, // Index: 0x12a Offset: 0x0
+	InappTransactionAddTransaction = 353, // Index: 0x12b Offset: 0x0
+	InappTransactionsMarkTransactionAsRefunded = 354, // Index: 0x12c Offset: 0x0
+	RemoveWeapon = 355, // Index: 0x12d Offset: 0x0
+	RemoveDetails = 356, // Index: 0x12e Offset: 0x0
+	RemoveBRVehicle = 357, // Index: 0x12f Offset: 0x0
+	RemoveGadget = 358, // Index: 0x130 Offset: 0x0
+	EquipWearSkin = 360, // Index: 0x131 Offset: 0x0
+	UnequipWearSkin = 361, // Index: 0x132 Offset: 0x0
+	RouletteAdsSaveConfig = 362, // Index: 0x133 Offset: 0x0
+	RouletteAdsSelectReward = 363, // Index: 0x134 Offset: 0x0
+	RouletteAdsIncrementTotalSpins = 364, // Index: 0x135 Offset: 0x0
+	RouletteAdsAddGivenProgressBarReward = 365, // Index: 0x136 Offset: 0x0
+	RouletteAdsIncrementOfferBuyCount = 366, // Index: 0x137 Offset: 0x0
+	RouletteAdsEndSeason = 367, // Index: 0x138 Offset: 0x0
+	RouletteAdsSetWatchedVideo = 368, // Index: 0x139 Offset: 0x0
+	RouletteAdsSetLastTimeAdView = 369, // Index: 0x13a Offset: 0x0
+	UpdatePlayerStatsV2 = 370, // Index: 0x13b Offset: 0x0
+	ConstructableAdsOffersGenerate = 373, // Index: 0x13c Offset: 0x0
+	ConstructableAdsOffersSelectItem = 374, // Index: 0x13d Offset: 0x0
+	ConstructableAdsOffersIncrementWatchedVideoCount = 375, // Index: 0x13e Offset: 0x0
+	ClanWarV2StartSeason = 380, // Index: 0x13f Offset: 0x0
+	ClanWarV2GeneratePersonalTaskIndexes = 381, // Index: 0x140 Offset: 0x0
+	ClanWarV2GiveTaskReward = 382, // Index: 0x141 Offset: 0x0
+	ClanWarV2SpentEventFuel = 383, // Index: 0x142 Offset: 0x0
+	ClanWarV2SetGoblinCollectSilverAndShields = 384, // Index: 0x143 Offset: 0x0
+	ClanWarV2GiveEndWarReward = 385, // Index: 0x144 Offset: 0x0
+	ClanWarV2SaveFlagRegistration = 386, // Index: 0x145 Offset: 0x0
+	ClanWarV2GiveEventBattleReward = 387, // Index: 0x146 Offset: 0x0
+	ClanWarV2SaveClanId = 388, // Index: 0x147 Offset: 0x0
+	CardRouletteStart = 390, // Index: 0x148 Offset: 0x0
+	CardRouletteSaveShuffleCards = 391, // Index: 0x149 Offset: 0x0
+	CardRouletteObtainReward = 392, // Index: 0x14a Offset: 0x0
+	TopUpStartSeason = 393, // Index: 0x14b Offset: 0x0
+	TopUpEndSeason = 394, // Index: 0x14c Offset: 0x0
+	TopUpUpdateLastTimeFirstBanner = 395, // Index: 0x14d Offset: 0x0
+	TopUpUpdateLastTimeEndBanner = 396, // Index: 0x14e Offset: 0x0
+	TopUpUpdatePurchasedPromotions = 397, // Index: 0x14f Offset: 0x0
+	TopUpUpdateLastTimePresentationBanner = 398, // Index: 0x150 Offset: 0x0
+	AdventCalendarStartSeason = 401, // Index: 0x151 Offset: 0x0
+	AdventCalendarOpenCell = 402, // Index: 0x152 Offset: 0x0
+	AdventCalendarUnlockCell = 403, // Index: 0x153 Offset: 0x0
+	AdventCalendarSaveFlag = 404, // Index: 0x154 Offset: 0x0
+	AdventCalendarShowCell = 405, // Index: 0x155 Offset: 0x0
+	ConfrontationEventStartSeason = 406, // Index: 0x156 Offset: 0x0
+	ConfrontationEventEndSeason = 407, // Index: 0x157 Offset: 0x0
+	ConfrontationEventUpdateLastTimePresentationBanner = 408, // Index: 0x158 Offset: 0x0
+	ConfrontationEventUpdateLastTimeFirstBanner = 409, // Index: 0x159 Offset: 0x0
+	ConfrontationEventUpdateLastTimeEndBanner = 410, // Index: 0x15a Offset: 0x0
+	ConfrontationEventGiveEventRewards = 411, // Index: 0x15b Offset: 0x0
+	ConfrontationEventAcceptEvent = 412, // Index: 0x15c Offset: 0x0
+	ConfrontationEventGiveLeaderboardRewards = 413, // Index: 0x15d Offset: 0x0
+	ConfrontationEventUpdateStateTutorial = 414, // Index: 0x15e Offset: 0x0
+	ConfrontationEventUpdateLastTimeAboutToEndBanner = 415, // Index: 0x15f Offset: 0x0
+	TemplateEventStart = 420, // Index: 0x160 Offset: 0x0
+	TemplateEventStop = 421, // Index: 0x161 Offset: 0x0
+	TemplateEventPurchaseCell = 422, // Index: 0x162 Offset: 0x0
+	TemplateEventSaveShownBanner = 423, // Index: 0x163 Offset: 0x0
+	TemplateEventSaveSetting = 424, // Index: 0x164 Offset: 0x0
+	TemplateEventSaveShownExp = 425, // Index: 0x165 Offset: 0x0
+	ConfrontationEventV2StartSeason = 426, // Index: 0x166 Offset: 0x0
+	ConfrontationEventV2EndSeason = 427, // Index: 0x167 Offset: 0x0
+	ConfrontationEventV2AcceptEvent = 428, // Index: 0x168 Offset: 0x0
+	ConfrontationEventV2ShowBanner = 429, // Index: 0x169 Offset: 0x0
+	ConfrontationEventV2CollectRewards = 430, // Index: 0x16a Offset: 0x0
+	GameModeShopInit = 440, // Index: 0x16b Offset: 0x0
+	GameModeShopEquipItem = 441, // Index: 0x16c Offset: 0x0
+	GameModeShopAddToBoughtItem = 442, // Index: 0x16d Offset: 0x0
+	GameModeShopRemoveFromBuyItems = 443, // Index: 0x16e Offset: 0x0
+	GameModeShopUnEquipItems = 444, // Index: 0x16f Offset: 0x0
+	GameModeShopAddFlag = 445, // Index: 0x170 Offset: 0x0
+	GameModeShopRemoveFlag = 446, // Index: 0x171 Offset: 0x0
+	ChainOfferEventStart = 450, // Index: 0x172 Offset: 0x0
+	ChainOfferEventStop = 451, // Index: 0x173 Offset: 0x0
+	ChainOfferEventBuyCell = 452, // Index: 0x174 Offset: 0x0
+	ChainOfferEventSaveShownBanner = 453, // Index: 0x175 Offset: 0x0
+	TemplateEventSaveSpinData = 455, // Index: 0x176 Offset: 0x0
+	TemplateEventAddCellFlag = 456, // Index: 0x177 Offset: 0x0
+	TemplateEventSaveBuyCount = 457, // Index: 0x178 Offset: 0x0
+	TemplateEventSaveNumDay = 458, // Index: 0x179 Offset: 0x0
+	TemplateEventSaveRewardedCount = 459, // Index: 0x17a Offset: 0x0
+	ReturnGift = 460, // Index: 0x17b Offset: 0x0
+	DeleteDailyStatKeys = 461, // Index: 0x17c Offset: 0x0
+	TakeRewardForLeaderboard2023 = 462, // Index: 0x17d Offset: 0x0
+	XsollaInappTaken = 463, // Index: 0x17e Offset: 0x0
+	AnalyticsProgress = 777 // Index: 0x17f Offset: 0x0
+};
+
+enum CategoryNames
+{
+	PrimaryCategory = 0, // Index: 0x1 Offset: 0x0
+	BackupCategory = 1, // Index: 0x2 Offset: 0x0
+	MeleeCategory = 2, // Index: 0x3 Offset: 0x0
+	SpecilCategory = 3, // Index: 0x4 Offset: 0x0
+	SniperCategory = 4, // Index: 0x5 Offset: 0x0
+	PremiumCategory = 5, // Index: 0x6 Offset: 0x0
+	HatsCategory = 6, // Index: 0x7 Offset: 0x0
+	ArmorCategory = 7, // Index: 0x8 Offset: 0x0
+	SkinsCategory = 8, // Index: 0x9 Offset: 0x0
+	CapesCategory = 9, // Index: 0xa Offset: 0x0
+	BootsCategory = 10, // Index: 0xb Offset: 0x0
+	GearCategory = 11, // Index: 0xc Offset: 0x0
+	MaskCategory = 12, // Index: 0xd Offset: 0x0
+	SkinsCategoryEditor = 1000, // Index: 0xe Offset: 0x0
+	SkinsCategoryMale = 1100, // Index: 0xf Offset: 0x0
+	SkinsCategoryFemale = 1200, // Index: 0x10 Offset: 0x0
+	SkinsCategorySpecial = 1300, // Index: 0x11 Offset: 0x0
+	SkinsCategoryPremium = 1400, // Index: 0x12 Offset: 0x0
+	LeagueWeaponSkinsCategory = 2000, // Index: 0x13 Offset: 0x0
+	LeagueHatsCategory = 2100, // Index: 0x14 Offset: 0x0
+	LeagueSkinsCategory = 2200, // Index: 0x15 Offset: 0x0
+	ThrowingCategory = 12500, // Index: 0x16 Offset: 0x0
+	ToolsCategoty = 13000, // Index: 0x17 Offset: 0x0
+	SupportCategory = 13500, // Index: 0x18 Offset: 0x0
+	PetsCategory = 25000, // Index: 0x19 Offset: 0x0
+	EggsCategory = 30000, // Index: 0x1a Offset: 0x0
+	BestWeapons = 35000, // Index: 0x1b Offset: 0x0
+	BestWear = 40000, // Index: 0x1c Offset: 0x0
+	BestGadgets = 45000, // Index: 0x1d Offset: 0x0
+	WeaponCraftCategory = 110000, // Index: 0x1e Offset: 0x0
+	EventCraftCategory = 135000, // Index: 0x1f Offset: 0x0
+	SetsCraftCategory = 140000, // Index: 0x20 Offset: 0x0
+	RoyaleCraftCategory = 141000, // Index: 0x21 Offset: 0x0
+	AvatarCategory = 150000, // Index: 0x22 Offset: 0x0
+	GlidersRoyaleCategory = 160000, // Index: 0x23 Offset: 0x0
+	ShovelsRoyaleCategory = 170000, // Index: 0x24 Offset: 0x0
+	HatsRoyaleCategory = 180000, // Index: 0x25 Offset: 0x0
+	RoyaleAvatarsCategory = 190000, // Index: 0x26 Offset: 0x0
+	TrailRoyaleCategory = 200000, // Index: 0x27 Offset: 0x0
+	TransportRoyaleCategory = 210000, // Index: 0x28 Offset: 0x0
+	ItemModule = 220000, // Index: 0x29 Offset: 0x0
+	ItemModulesChest = 230000, // Index: 0x2a Offset: 0x0
+	WeaponSkinsCategory = 240000, // Index: 0x2b Offset: 0x0
+	GraffitiCategory = 250000, // Index: 0x2c Offset: 0x0
+	ArmorSkinCategory = 260000, // Index: 0x2d Offset: 0x0
+	WearSkinCategory = 270000, // Index: 0x2e Offset: 0x0
+	None = 9990000 // Index: 0x2f Offset: 0x0
+};
+
+enum class OfferItemType
+{
+	None = 0,
+	Weapon = 10,
+	Armor = 20,
+	Mask = 30,
+	Hat = 40,
+	Boots = 50,
+	Cape = 60,
+	Skin = 65,
+	Gadget = 70,
+	Pet = 80,
+	Egg = 83,
+	LobbyItem = 85,
+	FortItem = 90,
+	Gems = 1000,
+	Coins = 1010,
+	Leprechaun = 1020,
+	WeaponUpgrade = 1030,
+	GachaFreeSpin = 1040,
+	EventCurrency = 1050,
+	VIP = 1060,
+	Parts = 1070,
+	Royale = 1080,
+	BattlePassLevel = 1090,
+	BattlePassExp = 1100,
+	BattlePassCurrency = 1110,
+	GoldenSkin = 1120,
+	EventChest = 1130,
+	CraftCurrency = 1140,
+	Module = 1150,
+	ModulePoint = 1155,
+	ModuleChest = 1160,
+	WeaponSkin = 1170,
+	ClanCurrency = 1180,
+	Coupons = 1190,
+	Currency = 1200,
+	Character = 1210,
+	ClanShields = 1220,
+	ClanLootBox = 1230,
+	ClanPlaceable = 1240,
+	ClanPlaceablePoint = 1250,
+	Detail = 1300,
+	WeaponLevelUpgrade = 1310,
+	PlayerBuff = 1320,
+	ClanBuff = 1330,
+	WeaponQualityUpgrade = 1340,
+	ArmorSkin = 1350,
+	ClanBuilding = 1360,
+	ClanBuildingPoint = 1370,
+	FreeUpgrade = 1380,
+	Chest = 1390,
+	Exp = 1400,
+	Stats = 1410,
+	ModeSlots = 1420,
+	Executable = 1430,
+	Tank = 1440,
+	VIP20 = 1450,
+	LootBox = 1460,
+	Graffiti = 1470,
+	PixelPassExp = 1490,
+	ClanRankExperience = 1500,
+	WearSkin = 1510,
+	Applicable = 1520,
+	CraftSet = 1530,
+	FeatureExp = 1540,
+	PackagedItem = 1550,
+	Achievement = 1560,
+	ExpirySimple = 1570,
+	Static = 1580,
+	GemsHarvester = 1590,
+	TreasureMap = 1600
+};
+
+
+enum class PhotonTargets // TypeDefIndex: 7416
+{
+	All = 0,
+	Others = 1,
+	MasterClient = 2,
+	AllBuffered = 3,
+	OthersBuffered = 4,
+	AllViaServer = 5,
+	AllBufferedViaServer = 6,
+	SelfViaServer = 7
+};
+
+enum class EventEnum // TypeDefIndex: 9067
+{
+	ActivateMechRPC = 0,
+	AddBonusAfterKillPlayerRPC = 1,
+	AddForceRPC = 2,
+	AddFreezerRayWithLength = 3,
+	AddPaticleBazeRPC = 4,
+	AddPlayerInCapturePoint = 5,
+	AddScoreDuckHuntRPC = 6,
+	AddWeaponAfterKillPlayerRPC = 7,
+	AdvancedEffectRPC = 8,
+	AdvancedEffectWithSenderRPC = 9,
+	ApplyDamageRPC = 10,
+	ApplyDebuffRPC = 11,
+	ChargeGunAnimation = 12,
+	ClearScoreCommandInFlagGameRPC = 13,
+	Collide = 14,
+	CountKillsCommandSynch = 15,
+	CreateChestRPC = 16,
+	DeactivateMechRPC = 17,
+	DestroyRpc = 18,
+	GetInPlayerRPC = 19,
+	ShowSelectedFortNotification = 20,
+	fireFlash = 21,
+	GetBonusRewardRPC = 22,
+	ActivateGadgetRPC = 23,
+	GetDamageRPC = 24,
+	RespawnRPC = 25,
+	Go = 26,
+	GoBazaRPC = 27,
+	GoMatchRPC = 28,
+	HoleRPC = 29,
+	ImDeadInHungerGamesRPC = 30,
+	imDeath = 31,
+	ImKilledRPC = 32,
+	IsVisible_RPC = 33,
+	KilledByRPC = 34,
+	LikeRPC = 35,
+	MakeBonusRPC = 36,
+	MeKillRPC = 37,
+	OpponentLeftGame = 38,
+	PlayDestroyEffectRpc = 39,
+	PlayerEffectRPC = 40,
+	PlayMusic = 41,
+	PlayPortalSoundRPC = 42,
+	PlayZombieAttackRPC = 43,
+	PlayZombieRunRPC = 44,
+	plusCountKillsCommand = 45,
+	CheckActivityRPC = 46,
+	HitByVehicleRPC = 47,
+	ReloadGun = 48,
+	RemoveBonusRPC = 49,
+	RemoveBonusWithRewardRPC = 50,
+	RemovePlayerInCapturePoint = 51,
+	ResumeMatchRPC = 52,
+	RevengeRequestRPC = 53,
+	SendBuffParameters = 54,
+	SendChatMessageWithIcon = 55,
+	SendSystemMessegeFromFlagAddScoreRPC = 56,
+	SendSystemMessegeFromFlagDroppedRPC = 57,
+	SendSystemMessegeFromFlagReturnedRPC = 58,
+	SetArmorVisInvisibleRPC = 59,
+	setBootsRPC = 60,
+	SetBotHealthRPC = 61,
+	setCapeRPC = 62,
+	SetCaptureRPC = 63,
+	SetEnemyArmor = 64,
+	SetEnemyBoots = 65,
+	SetEnemyCape = 66,
+	SetEnemyHat = 67,
+	SetEnemyMask = 68,
+	SetEnemyPet = 69,
+	SetEnemySkin = 70,
+	SetEnemyWeapon = 71,
+	SetGadgetEffectActiveRPC = 72,
+	SetGadgetesRPC = 73,
+	SetHatWithInvisebleRPC = 74,
+	SetBigHeadRPC = 75,
+	SetJetpackEnabledRPC = 76,
+	SetJetpackParticleEnabledRPC = 77,
+	SetMaskRPC = 78,
+	SetMyClanTexture = 79,
+	SetMySkin = 80,
+	SetNickName = 81,
+	SetNOCaptureRPC = 82,
+	SetPixelBookID = 83,
+	SetRocketActive = 84,
+	SetRocketActiveWithCharge = 85,
+	SetRocketStickedRPC = 86,
+	SetTargetRPC = 87,
+	SetVisibleFireEffectRpc = 88,
+	SetWeaponRPC = 89,
+	SetWeaponSkinRPC = 90,
+	SetWearIsInvisibleRPC = 91,
+	ShotRPC = 92,
+	ShowBonuseParticleRPC = 93,
+	ShowExplosion = 94,
+	ShowMultyKillRPC = 95,
+	SinchCapture = 96,
+	SlowdownRPC = 97,
+	StartFlashRPC = 98,
+	StartGame = 99,
+	StartMatchRPC = 100,
+	StartNewRespanObjectRpc = 101,
+	StartRocketRPC = 102,
+	StartShootLoopRPC = 103,
+	StartTurretRPC = 104,
+	SynchCaptureCounter = 105,
+	SynchCaptureCounterNewPlayer = 106,
+	SynchGameRating = 107,
+	SynchGameTimer = 108,
+	SynchNamberSpawnZoneRPC = 109,
+	SynchNumUpdateRPC = 110,
+	SynchronizeTimeRPC = 111,
+	SynchScoreCommandRPC = 112,
+	SynchScoresCommandsNewPlayerRPC = 113,
+	SynchScoresCommandsRPC = 114,
+	SynchStartTimer = 115,
+	SynhCommandRPC = 116,
+	SynhCountKillsRPC = 117,
+	SynhDeltaHealthRPC = 118,
+	SynhHealthRPC = 119,
+	SynhIsZoming = 120,
+	SynhNameRPC = 121,
+	SynhRanksRPC = 122,
+	SynhScoreRPC = 123,
+	SynhDeltaArmorRPC = 124,
+	PropertyRPC = 125,
+	winInHungerRPC = 126,
+	SetPlayerUniqID = 127,
+	SynchLivesItems = 128,
+	RegisterPlayerRPC = 129,
+	SetGamemodeRPC = 130,
+	SetMapRPC = 131,
+	StartGameRPC = 132,
+	SetReadyRPC = 133,
+	QuitFromSquadRPC = 134,
+	ShowStartGameRPC = 135,
+	StartTimerRPC = 136,
+	KickPlayerRPC = 137,
+	SynchCurrentCategory = 138,
+	ResetVersusTimerRPC = 139,
+	StartAirDropItemRPC = 140,
+	MakeBetRPC = 141,
+	GoTeamMatchRPC = 142,
+	StartTeamMatchRPC = 143,
+	SynchronizeMatchTimeRPC = 144,
+	SetRocketActiveWithNumSmoke = 145,
+	SynhDeathCountRPC = 146,
+	GoRevengeMatchRPC = 147,
+	EndRoundRPC = 148,
+	SynchronizeGoTimeRPC = 149,
+	SyncronizeTeamWins = 150,
+	FireFlashDamagebleRPC = 151,
+	SetMaxArmorAndHealthRPC = 152,
+	SendEmojiRPC = 153,
+	SynchGetGadgets = 154,
+	SyncTramPosition = 155,
+	UnregisterPlayerRPC = 156,
+	SyncLastMoveTime = 157,
+	RemoveTargetRPC = 158,
+	AttackGateRPC = 159,
+	ShotArtilleryRPC = 160,
+	SetDestinationRPC = 161,
+	SetEquipRPC = 162,
+	ShowEndEventRPC = 163,
+	ShowEndEventNotificationRPC = 164,
+	PlayingInSquadRPC = 165,
+	SynchCombatLevelRPC = 166,
+	SendPetIdRPC = 167,
+	SynchGameLeague = 168,
+	ActiveChunkChangedRPC = 169,
+	GetBonusRPC = 170,
+	SetGliderRPC = 171,
+	AddWeaponAfterBonusPreviewRPC = 172,
+	RemoveWeaponPreviewRPC = 173,
+	SetRoyaleAvatarRPC = 174,
+	SetMapPositionSquadRPC = 175,
+	PlayerInjuredRPC = 176,
+	SynhHealthInjuredRPC = 177,
+	PlayerInjuryHealedRPC = 178,
+	SetLandingTrailRPC = 179,
+	SetUserMapMarkerRPC = 180,
+	RemoveUserMapMarkerRPC = 181,
+	FlyOnGliderSynchRPC = 182,
+	BattleRoyaleSquadMemberKilledRPC = 183,
+	HealingByPlayerRPC = 184,
+	PlayerInjuryHealingProgressRPC = 185,
+	WinRequestRPC = 186,
+	SetMyAvatar = 187,
+	SetEnemyAvatar = 188,
+	SetEquipTypeRPC = 189,
+	SynchMinigunRotationRPC = 190,
+	PlayZombieBeforeAttackRPC = 191,
+	SendNewEmojiRPC = 192,
+	SynchVehicleParamsRPC = 193,
+	SendBattleEmojiRPC = 194,
+	SynchVehicleColorRPC = 195,
+	SendChangeMobRPC = 196,
+	EnterInTrigger = 197,
+	SynchWeaponModulesRPC = 198,
+	SynchArmorModulesRPC = 199,
+	SetModuleGadgetEffectActiveRPC = 200,
+	CreateRocketRPC = 201,
+	ShowEffectOnOtherPlayersRPC = 202,
+	SetParticleToWeaponRPC = 203,
+	RegenerateHealthMob = 204,
+	SendKillMob = 205,
+	SynhDeltaHealthFromWeaponRPC = 206,
+	JumpDisableRPC = 207,
+	SetPortalRPC = 208,
+	ActivatePolymorphRPC = 209,
+	DeactivatePolymorphRPC = 210,
+	AlternativeMobAttack = 211,
+	AlternativeMobShot = 212,
+	DetonateKamikadze = 213,
+	SetWeaponLevel = 214,
+	MarkEnemy = 215,
+	GetDamageToShieldRPC = 216,
+	SendOnGroundEffect = 217,
+	PluginRPC = 218,
+	EnableTeleportEffectsRPC = 219,
+	AddAmmoFromWeaponRPC = 220,
+	KillerInvisiblityRPC = 221,
+	SyncGadgetReflectorCoeffRPC = 222,
+	SynchVipStatusRPC = 223,
+	InviteToSquadRPC = 224,
+	JoinSquadRPC = 225,
+	InviteToSquadFailRPC = 226,
+	SyncBreakableObjects = 227,
+	FreeFallSynchRPC = 228,
+	SyncCableCarRPC = 229,
+	StartPlantingBomb = 230,
+	ResetPlantingBomb = 231,
+	StartDefusingBomb = 232,
+	ResetDefusingBomb = 233,
+	SetIsPaidTransport = 234,
+	SyncOwnerTransport = 235,
+	SyncCharIdRPC = 236,
+	SyncTeammateRegenByMe = 237,
+	BossSpawned = 238,
+	NewPlayerFillSafe = 239,
+	SetPlayerWantedRPC = 240
+};
+
+static const char* rpcEntries[] = {
+		"ActivateMechRPC",
+		"AddBonusAfterKillPlayerRPC",
+		"AddForceRPC",
+		"AddFreezerRayWithLength",
+		"AddPaticleBazeRPC",
+		"AddPlayerInCapturePoint",
+		"AddScoreDuckHuntRPC",
+		"AddWeaponAfterKillPlayerRPC",
+		"AdvancedEffectRPC",
+		"AdvancedEffectWithSenderRPC",
+		"ApplyDamageRPC",
+		"ApplyDebuffRPC",
+		"ChargeGunAnimation",
+		"ClearScoreCommandInFlagGameRPC",
+		"Collide",
+		"CountKillsCommandSynch",
+		"CreateChestRPC",
+		"DeactivateMechRPC",
+		"DestroyRpc",
+		"GetInPlayerRPC",
+		"ShowSelectedFortNotification",
+		"fireFlash",
+		"GetBonusRewardRPC",
+		"ActivateGadgetRPC",
+		"GetDamageRPC",
+		"RespawnRPC",
+		"Go",
+		"GoBazaRPC",
+		"GoMatchRPC",
+		"HoleRPC",
+		"ImDeadInHungerGamesRPC",
+		"imDeath",
+		"ImKilledRPC",
+		"IsVisible_RPC",
+		"KilledByRPC",
+		"LikeRPC",
+		"MakeBonusRPC",
+		"MeKillRPC",
+		"OpponentLeftGame",
+		"PlayDestroyEffectRpc",
+		"PlayerEffectRPC",
+		"PlayMusic",
+		"PlayPortalSoundRPC",
+		"PlayZombieAttackRPC",
+		"PlayZombieRunRPC",
+		"plusCountKillsCommand",
+		"CheckActivityRPC",
+		"HitByVehicleRPC",
+		"ReloadGun",
+		"RemoveBonusRPC",
+		"RemoveBonusWithRewardRPC",
+		"RemovePlayerInCapturePoint",
+		"ResumeMatchRPC",
+		"RevengeRequestRPC",
+		"SendBuffParameters",
+		"SendChatMessageWithIcon",
+		"SendSystemMessegeFromFlagAddScoreRPC",
+		"SendSystemMessegeFromFlagDroppedRPC",
+		"SendSystemMessegeFromFlagReturnedRPC",
+		"SetArmorVisInvisibleRPC",
+		"setBootsRPC",
+		"SetBotHealthRPC",
+		"setCapeRPC",
+		"SetCaptureRPC",
+		"SetEnemyArmor",
+		"SetEnemyBoots",
+		"SetEnemyCape",
+		"SetEnemyHat",
+		"SetEnemyMask",
+		"SetEnemyPet",
+		"SetEnemySkin",
+		"SetEnemyWeapon",
+		"SetGadgetEffectActiveRPC",
+		"SetGadgetesRPC",
+		"SetHatWithInvisebleRPC",
+		"SetBigHeadRPC",
+		"SetJetpackEnabledRPC",
+		"SetJetpackParticleEnabledRPC",
+		"SetMaskRPC",
+		"SetMyClanTexture",
+		"SetMySkin",
+		"SetNickName",
+		"SetNOCaptureRPC",
+		"SetPixelBookID",
+		"SetRocketActive",
+		"SetRocketActiveWithCharge",
+		"SetRocketStickedRPC",
+		"SetTargetRPC",
+		"SetVisibleFireEffectRpc",
+		"SetWeaponRPC",
+		"SetWeaponSkinRPC",
+		"SetWearIsInvisibleRPC",
+		"ShotRPC",
+		"ShowBonuseParticleRPC",
+		"ShowExplosion",
+		"ShowMultyKillRPC",
+		"SinchCapture",
+		"SlowdownRPC",
+		"StartFlashRPC",
+		"StartGame",
+		"StartMatchRPC",
+		"StartNewRespanObjectRpc",
+		"StartRocketRPC",
+		"StartShootLoopRPC",
+		"StartTurretRPC",
+		"SynchCaptureCounter",
+		"SynchCaptureCounterNewPlayer",
+		"SynchGameRating",
+		"SynchGameTimer",
+		"SynchNamberSpawnZoneRPC",
+		"SynchNumUpdateRPC",
+		"SynchronizeTimeRPC",
+		"SynchScoreCommandRPC",
+		"SynchScoresCommandsNewPlayerRPC",
+		"SynchScoresCommandsRPC",
+		"SynchStartTimer",
+		"SynhCommandRPC",
+		"SynhCountKillsRPC",
+		"SynhDeltaHealthRPC",
+		"SynhHealthRPC",
+		"SynhIsZoming",
+		"SynhNameRPC",
+		"SynhRanksRPC",
+		"SynhScoreRPC",
+		"SynhDeltaArmorRPC",
+		"PropertyRPC",
+		"winInHungerRPC",
+		"SetPlayerUniqID",
+		"SynchLivesItems",
+		"RegisterPlayerRPC",
+		"SetGamemodeRPC",
+		"SetMapRPC",
+		"StartGameRPC",
+		"SetReadyRPC",
+		"QuitFromSquadRPC",
+		"ShowStartGameRPC",
+		"StartTimerRPC",
+		"KickPlayerRPC",
+		"SynchCurrentCategory",
+		"ResetVersusTimerRPC",
+		"StartAirDropItemRPC",
+		"MakeBetRPC",
+		"GoTeamMatchRPC",
+		"StartTeamMatchRPC",
+		"SynchronizeMatchTimeRPC",
+		"SetRocketActiveWithNumSmoke",
+		"SynhDeathCountRPC",
+		"GoRevengeMatchRPC",
+		"EndRoundRPC",
+		"SynchronizeGoTimeRPC",
+		"SyncronizeTeamWins",
+		"FireFlashDamagebleRPC",
+		"SetMaxArmorAndHealthRPC",
+		"SendEmojiRPC",
+		"SynchGetGadgets",
+		"SyncTramPosition",
+		"UnregisterPlayerRPC",
+		"SyncLastMoveTime",
+		"RemoveTargetRPC",
+		"AttackGateRPC",
+		"ShotArtilleryRPC",
+		"SetDestinationRPC",
+		"SetEquipRPC",
+		"ShowEndEventRPC",
+		"ShowEndEventNotificationRPC",
+		"PlayingInSquadRPC",
+		"SynchCombatLevelRPC",
+		"SendPetIdRPC",
+		"SynchGameLeague",
+		"ActiveChunkChangedRPC",
+		"GetBonusRPC",
+		"SetGliderRPC",
+		"AddWeaponAfterBonusPreviewRPC",
+		"RemoveWeaponPreviewRPC",
+		"SetRoyaleAvatarRPC",
+		"SetMapPositionSquadRPC",
+		"PlayerInjuredRPC",
+		"SynhHealthInjuredRPC",
+		"PlayerInjuryHealedRPC",
+		"SetLandingTrailRPC",
+		"SetUserMapMarkerRPC",
+		"RemoveUserMapMarkerRPC",
+		"FlyOnGliderSynchRPC",
+		"BattleRoyaleSquadMemberKilledRPC",
+		"HealingByPlayerRPC",
+		"PlayerInjuryHealingProgressRPC",
+		"WinRequestRPC",
+		"SetMyAvatar",
+		"SetEnemyAvatar",
+		"SetEquipTypeRPC",
+		"SynchMinigunRotationRPC",
+		"PlayZombieBeforeAttackRPC",
+		"SendNewEmojiRPC",
+		"SynchVehicleParamsRPC",
+		"SendBattleEmojiRPC",
+		"SynchVehicleColorRPC",
+		"SendChangeMobRPC",
+		"EnterInTrigger",
+		"SynchWeaponModulesRPC",
+		"SynchArmorModulesRPC",
+		"SetModuleGadgetEffectActiveRPC",
+		"CreateRocketRPC",
+		"ShowEffectOnOtherPlayersRPC",
+		"SetParticleToWeaponRPC",
+		"RegenerateHealthMob",
+		"SendKillMob",
+		"SynhDeltaHealthFromWeaponRPC",
+		"JumpDisableRPC",
+		"SetPortalRPC",
+		"ActivatePolymorphRPC",
+		"DeactivatePolymorphRPC",
+		"AlternativeMobAttack",
+		"AlternativeMobShot",
+		"DetonateKamikadze",
+		"SetWeaponLevel",
+		"MarkEnemy",
+		"GetDamageToShieldRPC",
+		"SendOnGroundEffect",
+		"PluginRPC",
+		"EnableTeleportEffectsRPC",
+		"AddAmmoFromWeaponRPC",
+		"KillerInvisiblityRPC",
+		"SyncGadgetReflectorCoeffRPC",
+		"SynchVipStatusRPC",
+		"InviteToSquadRPC",
+		"JoinSquadRPC",
+		"InviteToSquadFailRPC",
+		"SyncBreakableObjects",
+		"FreeFallSynchRPC",
+		"SyncCableCarRPC",
+		"StartPlantingBomb",
+		"ResetPlantingBomb",
+		"StartDefusingBomb",
+		"ResetDefusingBomb",
+		"SetIsPaidTransport",
+		"SyncOwnerTransport",
+		"SyncCharIdRPC",
+		"SyncTeammateRegenByMe",
+		"BossSpawned",
+		"NewPlayerFillSafe",
+		"SetPlayerWantedRPC",
+		"InitMobSpawnPoint"
+};	
+
+enum class ExpObtainCause
+{
+	None = 0,
+	AddLevelIfNeededOnInit = 1,
+	DecreaseExpIfCurrentLevelMoreThanInConfig = 2,
+	RewardForTraining = 3,
+	MultiplayerMatchReward = 4,
+	CampaignLevelComplete = 5,
+	SurvivalMatchReward = 6,
+	GetCampaignBonusCoin = 7,
+	GetCampaignBonusSpeedRunCoin = 8,
+	VeteranChestOpen = 9,
+	ClassicArenaMatchReward = 10,
+	Inapp = 11,
+	CardRouletteObtainReward = 12,
+	GameOffer = 14,
+	TemplateEventPurchaseCell = 15,
+	DevConsole = 6549877,
+	DevFpsManager = 6628428,
+	DevCodeKey = 6793202,
+	DevButtons = 6813527
+};
+
+struct AnalyticsParamater 
+{
+	int field1;
+	int field2;
+	int field3;
+	int field4;
+	int field5;
+	int field6;
+	int field7;
+	bool field8;
+	int field9;
+	int field10;
+	bool field11;
+	int field12;
+	int field13;
+	bool field14;
+	int field15;
+	int field16;
+	int field17;
+	bool field18;
+	int64_t field19;
+	int field20;
+	bool field21;
+	bool field22;
+	bool field23;
+	bool field24;
+	int field25;
+};
+
+struct Strackframe : public IL2CPP::Object
+{
+	int32_t ilOffset;
+	int32_t nativeOffset;
+	int64_t methodAddress;
+	uint32_t methodIndex;
+	IL2CPP::Object* methodBase;
+	IL2CPP::String* fileName;
+	int32_t lineNumber;
+	int32_t columnNumber;
+	IL2CPP::String* internalMethodName;
+};
+
+struct PhotonMessageInfo
+{
+	int timeInt;
+	IL2CPP::Object* sender;
+	IL2CPP::Object* photonView;
+};

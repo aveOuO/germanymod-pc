@@ -2,3 +2,8 @@
 out
 build
 CMakePresets.json
+
+# Build artifacts
+*.o
+*.obj
+*.log

@@ -1,0 +1,282 @@
+文件夹 PATH 列表
+卷序列号为 9467-2E10
+D:.
+│  .gitattributes
+│  .gitignore
+│  CMakeLists.txt
+│  CMakeSettings.json
+│  LICENSE
+│  README.md
+│  structure.txt
+│  
+├─.github
+│  └─workflows
+│          cmake-single-platform.yml
+│          
+├─assets
+│  └─fonts
+│          BuilderSans-Bold.ttf
+│          BuilderSans-ExtraBold.ttf
+│          BuilderSans-Light.ttf
+│          BuilderSans-Medium.ttf
+│          BuilderSans-Regular.ttf
+│          BuilderSans-SemiBold.ttf
+│          FontAwesome.ttf
+│          
+├─dependencies
+│  ├─base64
+│  │  │  CmakeLists.txt
+│  │  │  
+│  │  └─src
+│  │          base64.cpp
+│  │          base64.h
+│  │          
+│  ├─ImGui
+│  │  │  CMakeLists.txt
+│  │  │  LICENSE.txt
+│  │  │  readme.md
+│  │  │  
+│  │  ├─docs
+│  │  │      BACKENDS.md
+│  │  │      CHANGELOG.txt
+│  │  │      CONTRIBUTING.md
+│  │  │      EXAMPLES.md
+│  │  │      FAQ.md
+│  │  │      FONTS.md
+│  │  │      README.md
+│  │  │      TODO.txt
+│  │  │      
+│  │  └─src
+│  │      │  imconfig.h
+│  │      │  imgui.cpp
+│  │      │  imgui.h
+│  │      │  imgui_demo.cpp
+│  │      │  imgui_draw.cpp
+│  │      │  imgui_internal.h
+│  │      │  imgui_tables.cpp
+│  │      │  imgui_widgets.cpp
+│  │      │  imstb_rectpack.h
+│  │      │  imstb_textedit.h
+│  │      │  imstb_truetype.h
+│  │      │  
+│  │      └─backends
+│  │              imgui_impl_dx10.cpp
+│  │              imgui_impl_dx10.h
+│  │              imgui_impl_dx11.cpp
+│  │              imgui_impl_dx11.h
+│  │              imgui_impl_dx12.cpp
+│  │              imgui_impl_dx12.h
+│  │              imgui_impl_dx9.cpp
+│  │              imgui_impl_dx9.h
+│  │              imgui_impl_win32.cpp
+│  │              imgui_impl_win32.h
+│  │              
+│  ├─Logger
+│  │  │  CMakeLists.txt
+│  │  │  
+│  │  └─src
+│  │          Logger.cpp
+│  │          Logger.hpp
+│  │          
+│  ├─proplamatic-il2cpp
+│  │  │  CmakeLists.txt
+│  │  │  IL2CPP.hpp
+│  │  │  Main.cpp
+│  │  │  Main.hpp
+│  │  │  readme.md
+│  │  │  
+│  │  ├─backend
+│  │  │      api-function.cpp
+│  │  │      api-function.hpp
+│  │  │      api-import-list.hpp
+│  │  │      tabledefs.hpp
+│  │  │      types.hpp
+│  │  │      vm-functions.cpp
+│  │  │      vm-functions.hpp
+│  │  │      
+│  │  ├─exceptions
+│  │  │      ExceptionBase.cpp
+│  │  │      ExceptionBase.hpp
+│  │  │      IndexOutOfBound.hpp
+│  │  │      NoSuchClass.hpp
+│  │  │      NoSuchImage.hpp
+│  │  │      NoSuchMember.hpp
+│  │  │      NoSuchResult.hpp
+│  │  │      NullArgument.hpp
+│  │  │      PatternScanFailed.hpp
+│  │  │      UnexpectedError.hpp
+│  │  │      UnresolvedMappingQueue.hpp
+│  │  │      
+│  │  ├─misc
+│  │  │      CommonGameStructs.hpp
+│  │  │      
+│  │  ├─service
+│  │  │      ClassMapping.cpp
+│  │  │      ClassMapping.hpp
+│  │  │      CommonCShrap.cpp
+│  │  │      CommonCShrap.hpp
+│  │  │      Dumper.cpp
+│  │  │      Dumper.hpp
+│  │  │      
+│  │  ├─structures
+│  │  │  │  Class.cpp
+│  │  │  │  Class.hpp
+│  │  │  │  Domain.cpp
+│  │  │  │  Domain.hpp
+│  │  │  │  FieldInfo.cpp
+│  │  │  │  FieldInfo.hpp
+│  │  │  │  Image.cpp
+│  │  │  │  Image.hpp
+│  │  │  │  MethodInfo.cpp
+│  │  │  │  MethodInfo.hpp
+│  │  │  │  Object.cpp
+│  │  │  │  Object.hpp
+│  │  │  │  String.cpp
+│  │  │  │  String.hpp
+│  │  │  │  Type.cpp
+│  │  │  │  Type.hpp
+│  │  │  │  Typedefs.hpp
+│  │  │  │  
+│  │  │  ├─generic
+│  │  │  │      Array.hpp
+│  │  │  │      List.hpp
+│  │  │  │      
+│  │  │  └─misc
+│  │  │          PatternStructs.cpp
+│  │  │          PatternStructs.hpp
+│  │  │          
+│  │  └─wrapper
+│  │          MethodWrapper.hpp
+│  │          
+│  └─TulipHook
+│      │  CMakeLists.txt
+│      │  LICENSE
+│      │  readme.md
+│      │  
+│      └─src
+│          └─assembler
+│                  ArmV7Assembler.cpp
+│                  ArmV7Assembler.hpp
+│                  ArmV8Assembler.cpp
+│                  ArmV8Assembler.hpp
+│                  BaseAssembler.cpp
+│                  BaseAssembler.hpp
+│                  X64Assembler.cpp
+│                  X64Assembler.hpp
+│                  X86Assembler.cpp
+│                  X86Assembler.hpp
+│                  
+├─header-dependencies
+│      detours.h
+│      HttpService.hpp
+│      imgui_notify.hpp
+│      json.hpp
+│      obfuscator.h
+│      WinReg.hpp
+│      
+├─pdb-backup
+│      nazimod-loader-5am-26-07-2025.pdb
+│      nazimod-runtime-5am-30-07-2025.pdb
+│      
+├─script
+│      ExternMenuComponents.py
+│      PointerFunctionsGen.py
+│      ReadCrashStacktrace.bat
+│      ReadCrashStacktrace.py
+│      
+├─src
+│  ├─loader
+│  │      main.cpp
+│  │      main.hpp
+│  │      
+│  └─runtime
+│      │  Bootstrap.cpp
+│      │  Bootstrap.hpp
+│      │  entrypoint.cpp
+│      │  entrypoint.hpp
+│      │  
+│      ├─framework
+│      │  │  ConsoleManager.cpp
+│      │  │  ConsoleManager.hpp
+│      │  │  FIleDialogService.cpp
+│      │  │  FileDialogService.hpp
+│      │  │  GdiPlusManager.cpp
+│      │  │  GdiPlusManager.hpp
+│      │  │  Task.cpp
+│      │  │  TaskScheduler.cpp
+│      │  │  TaskScheduler.hpp
+│      │  │  UIComponent.hpp
+│      │  │  UIFramework.cpp
+│      │  │  UIFramework.cpp_backup
+│      │  │  UIFramework.hpp
+│      │  │  
+│      │  ├─backend
+│      │  │      Kiero.cpp
+│      │  │      Kiero.hpp
+│      │  │      UIBackend.cpp
+│      │  │      UIBackend.hpp
+│      │  │      
+│      │  └─fonts
+│      │          IconFontAwesome.h
+│      │          
+│      ├─game
+│      │  │  AntiAnalytics.cpp
+│      │  │  AntiAnalytics.hpp
+│      │  │  CrashString.h
+│      │  │  DumpsterFire.cpp
+│      │  │  DumpsterFire.hpp
+│      │  │  Functions.cpp
+│      │  │  Functions.hpp
+│      │  │  GameplayMain.cpp
+│      │  │  GameplayMain.hpp
+│      │  │  Global.cpp
+│      │  │  Global.hpp
+│      │  │  Menu.cpp
+│      │  │  Menu.hpp
+│      │  │  MouseFix.cpp
+│      │  │  MouseFix.hpp
+│      │  │  TransactionHandler.cpp
+│      │  │  TransactionHandler.hpp
+│      │  │  
+│      │  ├─import
+│      │  │      ClassFinder.cpp
+│      │  │      ClassFinder.hpp
+│      │  │      PointerFunctions.cpp
+│      │  │      PointerFunctions.hpp
+│      │  │      Structs.hpp
+│      │  │      
+│      │  ├─structures
+│      │  │      DictionaryBuilder.cpp
+│      │  │      DictionaryBuilder.hpp
+│      │  │      PointerWrapper.cpp
+│      │  │      PointerWrapper.hpp
+│      │  │      Stacktrace.cpp
+│      │  │      Stacktrace.hpp
+│      │  │      
+│      │  ├─utils
+│      │  │      MemPatcher.cpp
+│      │  │      MemPatcher.hpp
+│      │  │      
+│      │  └─websocket
+│      │          AccountCommands.cpp
+│      │          AccountCommands.hpp
+│      │          ClanCommands.cpp
+│      │          ClanCommands.hpp
+│      │          MessageBuilder.cpp
+│      │          MessageBuilder.hpp
+│      │          SquadCommands.cpp
+│      │          SquadCommands.hpp
+│      │          WebsocketCore.cpp
+│      │          WebsocketCore.hpp
+│      │          
+│      └─util
+│              Converter.cpp
+│              Converter.hpp
+│              HookingUtil.cpp
+│              HookingUtil.hpp
+│              MemoryUtil.cpp
+│              MemoryUtil.hpp
+│              
+└─static-libs
+        detours-x64.lib
+        

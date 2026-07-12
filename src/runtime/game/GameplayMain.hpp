@@ -8,6 +8,6 @@ namespace GameplayMain
 	extern IL2CPP::List<IL2CPP::Object*>* gPlayerMoveCList;
 	extern IL2CPP::List<IL2CPP::Object*>* gPhotonViewList;
 	extern bool gLogRPC;
-
+	void JoinRoomByName(const std::string& roomName);
 	void INIT();
 }

@@ -10,6 +10,9 @@
 #include <sstream>
 #include "DumpsterFire.hpp"
 #include "utils/MemPatcher.hpp"
+#include <Logger.hpp>
+#define LOG_INFO(...) Logger::Log(Logger::LogTag::Info, __VA_ARGS__)
+#include "import/PointerFunctions.hpp"
 
 namespace GameplayMain
 {
@@ -1219,6 +1222,55 @@ namespace GameplayMain
 			return;
 		}
 		$CallOrig(shotPressed, MyPlayerMoveC, p);
+	}
+
+	void JoinRoomByName(const std::string& roomName)
+	{
+		if (roomName.empty())
+		{
+			Logger::Log(Logger::LogTag::Warning, "JoinRoomByName: room name is empty");
+			return;
+		}
+
+		auto photonNetworkClass = IL2CPP::ClassMapping::GetClass("PhotonNetwork");
+		if (photonNetworkClass == nullptr)
+		{
+			Logger::Log(Logger::LogTag::Error, "JoinRoomByName: failed to resolve PhotonNetwork class");
+			return;
+		}
+
+		IL2CPP::MethodInfo* joinMethod = nullptr;
+		for (size_t paramCount : {1, 2, 3})
+		{
+			joinMethod = photonNetworkClass->GetMethod("JoinRoom", paramCount);
+			if (joinMethod != nullptr)
+			{
+				break;
+			}
+		}
+
+		if (joinMethod == nullptr)
+		{
+			Logger::Log(Logger::LogTag::Error, "JoinRoomByName: failed to resolve PhotonNetwork::JoinRoom");
+			return;
+		}
+
+		auto args = IL2CPP::Array<IL2CPP::Object*>::Create(IL2CPP::DefaultTypeClass::Object, joinMethod->GetParametersCount());
+		args->Set(0, IL2CPP::String::Create(roomName));
+
+		if (joinMethod->GetParametersCount() >= 2)
+		{
+			args->Set(1, IL2CPP::Object::BoxValue(IL2CPP::DefaultTypeClass::Boolean, false));
+		}
+
+		if (joinMethod->GetParametersCount() >= 3)
+		{
+			args->Set(2, IL2CPP::Object::BoxValue(IL2CPP::DefaultTypeClass::Boolean, false));
+		}
+
+		IL2CPP::Object* result = MethodBase::Invoke(reinterpret_cast<IL2CPP::Object*>(joinMethod), nullptr, args);
+		bool success = result != nullptr && result->Unbox<bool>();
+		Logger::Log(Logger::LogTag::Info, "JoinRoomByName: requested room '%s' (result=%s)", roomName.c_str(), success ? "true" : "false");
 	}
 
 	void INIT()
