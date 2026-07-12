@@ -109,29 +109,29 @@ namespace AllInOneJoiner
 	void ShowMenu()
 	{
 		std::cout << "\n========================================" << std::endl;
-		std::cout << "  WebSocket 状态: " << (IsWebSocketReady() ? "已连接 ✓" : "未连接 ✗") << std::endl;
+		std::cout << "  WebSocket Status: " << (IsWebSocketReady() ? "Connected" : "Not Connected") << std::endl;
 		std::cout << "========================================" << std::endl;
-		std::cout << "【🔫 武器】" << std::endl;
-		std::cout << "  1. 解锁所有武器 (Lv65/稀有5)" << std::endl;
-		std::cout << "  2. 解锁 RGB 武器套装" << std::endl;
-		std::cout << "  3. 解锁 Goofy 武器" << std::endl;
-		std::cout << "  4. 解锁所有武器皮肤" << std::endl;
-		std::cout << "  5. 添加武器零件" << std::endl;
-		std::cout << "【🎒 道具/模块】" << std::endl;
-		std::cout << "  6. 解锁所有道具" << std::endl;
-		std::cout << "  7. 解锁模块点 x99999" << std::endl;
-		std::cout << "  8. 升级所有模块" << std::endl;
-		std::cout << "  9. 解锁所有涂鸦" << std::endl;
-		std::cout << " 10. 添加免费升级 x999" << std::endl;
-		std::cout << "【📊 统计】" << std::endl;
-		std::cout << "  11. 添加 100 胜场统计" << std::endl;
-		std::cout << "  12. 添加 1 胜场(简单)" << std::endl;
-		std::cout << "【🔄 系统】" << std::endl;
-		std::cout << "  13. 刷新进度 (Reload)" << std::endl;
-		std::cout << "  14. 重新检查 WebSocket 状态" << std::endl;
-		std::cout << "  0. 退出" << std::endl;
+		std::cout << "[Weapons]" << std::endl;
+		std::cout << "  1. Unlock All Weapons (Lv65/Rare5)" << std::endl;
+		std::cout << "  2. Unlock RGB Weapon Set" << std::endl;
+		std::cout << "  3. Unlock Goofy Weapons" << std::endl;
+		std::cout << "  4. Unlock All Weapon Skins" << std::endl;
+		std::cout << "  5. Add Weapon Parts" << std::endl;
+		std::cout << "[Items/Modules]" << std::endl;
+		std::cout << "  6. Unlock All Gadgets" << std::endl;
+		std::cout << "  7. Unlock Module Points x99999" << std::endl;
+		std::cout << "  8. Upgrade All Modules" << std::endl;
+		std::cout << "  9. Unlock All Graffities" << std::endl;
+		std::cout << "  10. Add Free Upgrades x999" << std::endl;
+		std::cout << "[Statistics]" << std::endl;
+		std::cout << "  11. Add 100 Win Stats" << std::endl;
+		std::cout << "  12. Add 1 Win (Simple)" << std::endl;
+		std::cout << "[System]" << std::endl;
+		std::cout << "  13. Reload Progress" << std::endl;
+		std::cout << "  14. Recheck WebSocket Status" << std::endl;
+		std::cout << "  0. Exit" << std::endl;
 		std::cout << "========================================" << std::endl;
-		std::cout << "选择: ";
+		std::cout << "Choice: ";
 	}
 
 	void ConsoleInterface()
@@ -147,28 +147,28 @@ namespace AllInOneJoiner
 			{
 				switch (choice)
 				{
-				case 1: AccountCommands::UnlockWeapon(65, 5, (size_t)0, (size_t)99999); std::cout << "[+] 解锁所有武器 - 已发送" << std::endl; break;
-				case 2: AccountCommands::UnlockRGBWeaponSet(65, 5); std::cout << "[+] RGB 武器 - 已发送" << std::endl; break;
-				case 3: AccountCommands::UnlockGoofyWeapons(65, 5); std::cout << "[+] Goofy 武器 - 已发送" << std::endl; break;
-				case 4: AccountCommands::UnlockWeaponSkin((size_t)0, (size_t)99999); std::cout << "[+] 武器皮肤 - 已发送" << std::endl; break;
-				case 5: AccountCommands::AddParts(); std::cout << "[+] 武器零件 - 已发送" << std::endl; break;
-				case 6: AccountCommands::UnlockGadget(65); std::cout << "[+] 道具 - 已发送" << std::endl; break;
-				case 7: AccountCommands::UnlockModules(99999); std::cout << "[+] 模块点 - 已发送" << std::endl; break;
-				case 8: AccountCommands::UpgradeModules(); std::cout << "[+] 模块升级 - 已发送" << std::endl; break;
-				case 9: AccountCommands::UnlockGraffities(); std::cout << "[+] 涂鸦 - 已发送" << std::endl; break;
-				case 10: AccountCommands::AddFreeUpgrades(999); std::cout << "[+] 免费升级 - 已发送" << std::endl; break;
-				case 11: AccountCommands::AddWinStat(0, 100); std::cout << "[+] 100 胜场 - 已发送" << std::endl; break;
-				case 12: AccountCommands::AddMatchStat(true); std::cout << "[+] 1 胜场 - 已发送" << std::endl; break;
-				case 13: WebsocketCore::Reload(); std::cout << "[+] 进度刷新 - 已发送" << std::endl; break;
-				case 14: std::cout << "[i] WebSocket: " << (IsWebSocketReady() ? "已连接" : "未连接") << std::endl; break;
-				case 0: std::cout << "退出" << std::endl; return;
-				default: std::cout << "[!] 无效选择" << std::endl; break;
+				case 1: AccountCommands::UnlockWeapon(65, 5, (size_t)0, (size_t)99999); std::cout << "[+] Unlock All Weapons - Sent" << std::endl; break;
+				case 2: AccountCommands::UnlockRGBWeaponSet(65, 5); std::cout << "[+] RGB Weapons - Sent" << std::endl; break;
+				case 3: AccountCommands::UnlockGoofyWeapons(65, 5); std::cout << "[+] Goofy Weapons - Sent" << std::endl; break;
+				case 4: AccountCommands::UnlockWeaponSkin((size_t)0, (size_t)99999); std::cout << "[+] Weapon Skins - Sent" << std::endl; break;
+				case 5: AccountCommands::AddParts(); std::cout << "[+] Weapon Parts - Sent" << std::endl; break;
+				case 6: AccountCommands::UnlockGadget(65); std::cout << "[+] Gadgets - Sent" << std::endl; break;
+				case 7: AccountCommands::UnlockModules(99999); std::cout << "[+] Module Points - Sent" << std::endl; break;
+				case 8: AccountCommands::UpgradeModules(); std::cout << "[+] Module Upgrade - Sent" << std::endl; break;
+				case 9: AccountCommands::UnlockGraffities(); std::cout << "[+] Graffities - Sent" << std::endl; break;
+				case 10: AccountCommands::AddFreeUpgrades(999); std::cout << "[+] Free Upgrades - Sent" << std::endl; break;
+				case 11: AccountCommands::AddWinStat(0, 100); std::cout << "[+] 100 Wins - Sent" << std::endl; break;
+				case 12: AccountCommands::AddMatchStat(true); std::cout << "[+] 1 Win - Sent" << std::endl; break;
+				case 13: WebsocketCore::Reload(); std::cout << "[+] Progress Reloaded - Sent" << std::endl; break;
+				case 14: std::cout << "[INFO] WebSocket: " << (IsWebSocketReady() ? "Connected" : "Not Connected") << std::endl; break;
+				case 0: std::cout << "Exiting..." << std::endl; return;
+				default: std::cout << "[!] Invalid choice" << std::endl; break;
 				}
 			}
 			catch (const std::exception& e)
 			{
-				std::cout << "[!] 操作异常: " << e.what() << std::endl;
-				std::cout << "[!] 通常是因为 WebSocket 还没连接,或游戏版本 pattern 失效。" << std::endl;
+				std::cout << "[!] Operation Error: " << e.what() << std::endl;
+				std::cout << "[!] Usually because WebSocket not connected or game version pattern failed." << std::endl;
 			}
 		}
 	}
@@ -187,12 +187,16 @@ namespace AllInOneJoiner
 		}
 		DebugLog("SUCCESS: AllocConsole() succeeded");
 
+		// 设置控制台编码为中文 GBK (Windows 中文系统默认)
+		SetConsoleOutputCP(936);
+		SetConsoleCP(936);
+
 		freopen_s(reinterpret_cast<FILE**>(stdout), "CONOUT$", "w", stdout);
 		freopen_s(reinterpret_cast<FILE**>(stdin), "CONIN$", "r", stdin);
 		DebugLog("Console redirection set up");
 
 		// 设置控制台标题和窗口位置，让它更显眼
-		if (!SetConsoleTitle(TEXT("🎮 Pixel Gun 3D Mod Tool - 控制台菜单")))
+		if (!SetConsoleTitle(TEXT("Pixel Gun 3D Mod Tool - Console Menu")))
 		{
 			DebugLog("WARNING: SetConsoleTitle() failed");
 		}
@@ -219,12 +223,12 @@ namespace AllInOneJoiner
 
 		// 显示初始消息
 		std::cout << "========================================" << std::endl;
-		std::cout << "  Pixel Gun 3D - WebSocket 工具(真框架版)" << std::endl;
+		std::cout << "  Pixel Gun 3D - Mod Tool (Console Version)" << std::endl;
 		std::cout << "========================================" << std::endl;
-		std::cout << "编译时间: " << __DATE__ << " " << __TIME__ << std::endl;
-		std::cout << "框架: IL2CPP + PointerFunctions + WebsocketCore + MinHook" << std::endl;
+		std::cout << "Build Time: " << __DATE__ << " " << __TIME__ << std::endl;
+		std::cout << "Framework: IL2CPP + PointerFunctions + WebsocketCore + MinHook" << std::endl;
 		std::cout << "========================================" << std::endl;
-		std::cout << "[DEBUG] 如果你看到这个消息，说明控制台已成功创建!" << std::endl;
+		std::cout << "[SUCCESS] Console created successfully!" << std::endl;
 
 		DebugLog("Console output started, beginning framework initialization...");
 
@@ -239,9 +243,9 @@ namespace AllInOneJoiner
 		}
 
 		// 提示用户查看控制台窗口
-		std::cout << "\n[提示] 控制台菜单已打开！请查看标题为 'Pixel Gun 3D Mod Tool' 的窗口" << std::endl;
-		std::cout << "[提示] 如果看不到此窗口，请按 Alt+Tab 切换窗口" << std::endl;
-		std::cout << "[DEBUG] 控制台窗口应该已经显示在屏幕上方位置" << std::endl;
+		std::cout << "\n[TIP] Console menu is now open! Look for window titled 'Pixel Gun 3D Mod Tool'" << std::endl;
+		std::cout << "[TIP] If you don't see this window, press Alt+Tab to switch windows" << std::endl;
+		std::cout << "[INFO] Console window should be displayed at top of screen" << std::endl;
 
 		DebugLog("Starting console interface...");
 		ConsoleInterface();
@@ -254,7 +258,7 @@ namespace AllInOneJoiner
 // =============================================================================
 extern "C" __declspec(dllexport) void Initialize()
 {
-	DebugLog("=== EXPORT Initialize() called ===");
+	AllInOneJoiner::DebugLog("=== EXPORT Initialize() called ===");
 	AllInOneJoiner::Initialize();
 }
 
@@ -296,7 +300,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
 			AllInOneJoiner::Initialize();
 			AllInOneJoiner::DebugLog("Initialize() returned, thread ending");
 			return 0;
-		}, nullptr, 0, nullptr);
+		}, hModule, 0, nullptr);
 		break;
 	case DLL_PROCESS_DETACH:
 		AllInOneJoiner::DebugLog("=== DLL_PROCESS_DETACH ===");
